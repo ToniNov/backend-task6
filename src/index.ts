@@ -26,11 +26,11 @@ const io = new Server(server, {
     },
 });
 
-app.use(
-    cors({
-        origin: '*',
-    })
-);
+app.use(cors());
+
+// cors({
+//     origin: '*',
+// })
 
 app.use(express.urlencoded({extended: true,}));
 
