@@ -15,21 +15,21 @@ import messages from "./routes/messages";
 
 dotenv.config();
 
+
+export const corsOptions = {
+    origin: ["https://toninov.github.io/", "http://localhost:3000"],
+    credentials: true,
+    optionsSuccessStatus: 200,
+}
+
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server,{
     path: '/socket',
-    cors: {
-        origin: "https://toninov.github.io/",
-        methods: ['GET', 'POST'],
-    },
+    cors: corsOptions ,
 });
 
-app.use(
-    cors({
-        origin: "https://toninov.github.io/",
-    })
-);
+app.use(cors(corsOptions));
 
 app.use(express.urlencoded({extended: true,}));
 
