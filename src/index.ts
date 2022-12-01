@@ -22,7 +22,6 @@ const io = new Server(server, {
     cors: {
         origin: '*',
         methods: ['GET', 'POST'],
-        credentials: true
     },
 });
 
@@ -46,6 +45,7 @@ app.use(errorHandler);
 
 io.on('connection', (socket) => {
     socket.on('userName', (user) => {
+        console.log('U', user)
         const messageChangeStream = MessageModel.watch();
         messageChangeStream.on('change', async (data: ChangeStreamInsertDocument<MessageType>) => {
             if (data.fullDocument.to === user) {
@@ -57,6 +57,9 @@ io.on('connection', (socket) => {
                     to: data.fullDocument.to,
                     date: data.fullDocument.createdAt,
                 };
+
+                console.log('M', message)
+
                 io.to(socket.id).emit('newMessage', message);
             }
         });
