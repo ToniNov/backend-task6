@@ -15,12 +15,6 @@ import messages from "./routes/messages";
 
 dotenv.config();
 
-export const corsForIo ={
-    origin: ["https://toninov.github.io/", "http://localhost:3000"],
-    credentials: true,
-}
-
-
 export const corsOptions = {
     origin: ["https://toninov.github.io/", "http://localhost:3000"],
     credentials: true,
@@ -32,9 +26,7 @@ const server = http.createServer(app);
 
 const io = new Server(server,{
     path: '/socket',
-    cors: {
-        origin: ["https://toninov.github.io/", "http://localhost:3000"],
-    },
+    cors: corsOptions,
 });
 
 app.use(
