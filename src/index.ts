@@ -20,14 +20,14 @@ const server = http.createServer(app);
 const io = new Server(server,{
     path: '/socket',
     cors: {
-        origin: ["https://toninov.github.io/frontend-task6"],
+        origin: "https://toninov.github.io/",
         methods: ['GET', 'POST'],
     },
 });
 
 app.use(
     cors({
-        origin: "https://toninov.github.io/frontend-task6",
+        origin: "https://toninov.github.io/",
     })
 );
 
