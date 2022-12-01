@@ -27,7 +27,7 @@ const io = new Server(server,{
 
 app.use(
     cors({
-        origin: "https://ToniNov.github.io/frontend-task6",
+        origin: "https://toninov.github.io/frontend-task6",
     })
 );
 
