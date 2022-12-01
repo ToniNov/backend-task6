@@ -1,7 +1,5 @@
 import mongoose, { Connection } from 'mongoose';
-import dotenv from 'dotenv';
 
-dotenv.config();
 // @ts-ignore
 export let mongooseConnection: Connection = null;
 export async function connect(): Promise<void> {

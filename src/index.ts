@@ -1,9 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import cors from 'cors';
 import express, {Request, Response} from 'express';
 import {Server} from 'socket.io';
 import http from 'http';
 import {ChangeStreamInsertDocument} from 'mongodb';
-import dotenv from 'dotenv';
 import {errorHandler} from "./middleware/errorHendler";
 import MessageModel from './models/Message';
 import {MessageType} from "./types/types";
@@ -13,9 +14,19 @@ import signup from "./routes/signup";
 import users from "./routes/users";
 import messages from "./routes/messages";
 
-dotenv.config();
 
 const app = express();
+app.use(cors());
+app.use(express.urlencoded({extended: true,}));
+app.use(express.json());
+app.get('/', (req: Request, res: Response) => {
+    res.send('App works!');
+});
+app.use(Path.Auth, signup)
+app.use(Path.Users, users)
+app.use(Path.Messages, messages)
+app.use(errorHandler);
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
@@ -25,27 +36,7 @@ const io = new Server(server, {
         methods: ['GET', 'POST'],
     },
 });
-
-app.use(cors());
-
-// cors({
-//     origin: '*',
-// })
-
-app.use(express.urlencoded({extended: true,}));
-
-app.use(express.json());
 connect();
-
-app.get('/', (req: Request, res: Response) => {
-    res.send('App works!');
-});
-
-app.use(Path.Auth, signup)
-app.use(Path.Users, users)
-app.use(Path.Messages, messages)
-
-app.use(errorHandler);
 
 io.on('connection', (socket) => {
     socket.on('userName', (user) => {
