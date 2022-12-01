@@ -34,14 +34,12 @@ const io = new Server(server,{
     path: '/socket',
     cors: {
         origin: ["https://toninov.github.io/", "http://localhost:3000"],
-        credentials: true,
     },
 });
 
 app.use(
     cors({
-        origin: '*',
-        credentials: true,
+        origin: ["https://toninov.github.io/", "http://localhost:3000"],
     })
 );
 
