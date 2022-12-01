@@ -14,6 +14,6 @@ export const errorHandler = (err: Error, req: Request, res: Response) => {
         }
     } else {
         // For unhandled errors.
-        res.status(500).send({ code: ErrorCode.UnknownError, status: 500 } as ErrorModel);
+        res.status(400).send({ code: ErrorCode.UnknownError, status: 500 } as ErrorModel);
     }
 };

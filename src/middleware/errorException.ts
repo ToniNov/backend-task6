@@ -7,7 +7,7 @@ export class ErrorException extends Error {
     super(code);
     Object.setPrototypeOf(this, new.target.prototype);
     this.name = code;
-    this.status = 500;
+    this.status = 400;
     this.metaData = metaData;
     switch (code) {
       case ErrorCode.Unauthenticated:
@@ -25,7 +25,7 @@ export class ErrorException extends Error {
         this.status = 404;
         break;
       default:
-        this.status = 500;
+        this.status = 400;
         break;
     }
   }
